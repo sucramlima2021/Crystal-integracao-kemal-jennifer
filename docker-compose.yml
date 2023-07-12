@@ -1,0 +1,38 @@
+version: '3.8'
+
+      
+services:
+  database:
+    image: postgres:14.1-alpine
+    healthcheck:
+       test: ["CMD-SHELL", "pg_isready -U postgres"]
+       interval: 5s
+       timeout: 5s
+       retries: 5
+    restart: always
+    ports: 
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: lm505044
+    volumes: 
+      - ./create.sql:/docker-entrypoint-initdb.d/create.sql
+      - db:/var/lib/postgresql/data
+    
+
+  app:
+    build:
+      context: .
+    ports:
+      - "3000:3000"
+    command: ./wait-for.sh database:5432 -t 0 -- ./conf.sh
+   
+    depends_on:
+      database:
+        condition: service_healthy
+    
+
+volumes:
+  db:
+    driver: local  
+  
+  

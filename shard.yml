@@ -1,0 +1,27 @@
+name: impl
+version: 0.1.0
+
+authors:
+  - Marcus Lima <sucramlima@gmail.com>
+
+targets:
+  impl:
+    main: src/impl.cr
+
+crystal: 1.8.2
+
+license: MIT
+
+dependencies:
+  jennifer:
+    github: imdrasil/jennifer.cr
+    version: "~> 0.13.0"
+  
+  pg:
+    github: will/crystal-pg
+
+  kemal:
+    github: kemalcr/kemal
+
+  sam:
+    github: imdrasil/sam.cr

@@ -1,0 +1,17 @@
+default: &default
+  host: database
+  user: postgres
+  password: lm505044
+  adapter: postgres
+  skip_dumping_schema_sql: true
+  
+  #docker_container: postgres
+  #command_shell: docker
+
+development:
+  <<: *default
+  db: impl_development
+
+test:
+  <<: *default
+  db: impl_test
